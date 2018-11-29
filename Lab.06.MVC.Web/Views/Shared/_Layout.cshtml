@@ -1,0 +1,40 @@
+﻿
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>MovieBox</title>
+</head>
+
+@Scripts.Render("~/bundles/jquery")
+@Styles.Render("~/bundles/css")
+
+<body>
+    <header id="home">
+        <div class="bg-img">
+            <div class="overlay"></div>
+        </div>
+
+        <nav id="nav" class="navbar nav-transparent">
+            <div class="container">
+                <ul class="main-nav nav navbar-nav navbar-left">
+                    <li> @Html.ActionLink("Home", "GetAllMovies", "Movie")</li>
+                </ul>
+                <ul class="main-nav nav navbar-nav navbar-right">
+                    <li>@Html.ActionLink("Sign In", "SignIn", "Account")</li>
+                    @if (User.IsInRole("user"))
+                    {
+                        <li>@Html.ActionLink("Sign Out", "SignOut", "Account")</li>
+                    }
+                    @if (User.IsInRole("user") || User.IsInRole("admin"))
+                    {
+                        <li>@Html.ActionLink("Add Movie", "CreateMovie", "Movie")</li>
+                    }
+                </ul>
+            </div>
+        </nav>
+        <div class="container">
+            @RenderBody()
+        </div>
+    </header>
+</body>

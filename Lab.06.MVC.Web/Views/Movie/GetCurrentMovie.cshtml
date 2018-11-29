@@ -1,0 +1,79 @@
+﻿@using Lab._06.MVC.Web.Helper
+@using Lab._06.MVC.Web.Models
+@model Lab._06.MVC.BL.DTO.MovieDto
+
+@Scripts.Render("~/bundles/comments")
+
+<script type="text/javascript">
+    var commentManager = new CommentManager({
+        addCommentButtonID: $("#CommentsAdd"),
+
+    });
+</script>
+
+<div class="container-fluid" align="center">
+    <div class="container-fluid">
+        <div class="col-md-2">
+        </div>
+        <div class="col-md-8">
+            <h1>@Html.DisplayFor(modelItem => Model.MovieName)</h1>
+        </div>
+        <div class="col-md-2">
+            @if (User.IsInRole("admin"))
+            {
+                <nav id="nav" class="navbar nav-transparent">
+                    <ul class="main-nav nav navbar-nav navbar-right">
+                        <li>@Html.ActionLink("Remove", "RemoveMovie", "Movie", new { movieName = Model.MovieName }, null)</li>
+                        <li>@Html.ActionLink("Update", "UpdateMovie", "Movie", new { movieid = Model.MovieId }, null)</li>
+                    </ul>
+                </nav>
+            }
+        </div>
+    </div>
+    <br>
+    <div class="row">
+        <div class="col-md-8">
+            @Html.Image(Model.MoviePoster)
+        </div>
+        <div class="col-md-4">
+            <h4>Description:</h4>
+            <div align='justify'>
+                <p>@Html.DisplayFor(modelItem => Model.UserMovieNote)</p>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container">
+    @if (User.Identity.IsAuthenticated)
+    {
+        <p>
+            @Html.Partial("~/Views/Comments/AddComment.cshtml")
+        </p>
+    }
+    @foreach (var item in Model.MovieComments)
+    {
+        <hr>
+        <div id="nav" class="navbar nav-transparent row">
+            <div class="col-md-11">
+                <div class="col-md-1 .flex-column">
+                    <div type="upButton_@item.CommentId" class="glyphicon glyphicon-plus p-2" style="color:white"></div>
+                    <div class="p-2">@Html.DisplayFor(_ => item.CommentRating)</div>
+                    <div type="downButton_@item.CommentId" class="glyphicon glyphicon-minus p-2" style="color:white"></div>
+                </div>
+                <div class="col-md-offset-1">
+                    <strong class="text-info">@Html.DisplayFor(_ => item.UserName)<br></strong>
+
+                    @Html.DisplayFor(_ => item.Comment)
+                </div>
+            </div>
+            <div class="col-lg-1">
+                @if (User.IsInRole("admin") || User.Identity.Name == item.UserName)
+                {
+                    <ul class="main-nav nav navbar-nav navbar-right">
+                        <li>@Html.ActionLink("Remove", "RemoveComment", "Comments", new { commentId = item.CommentId, movieid = item.MovieId }, null)</li>
+                    </ul>
+                }
+            </div>
+        </div>
+    }
+</div>

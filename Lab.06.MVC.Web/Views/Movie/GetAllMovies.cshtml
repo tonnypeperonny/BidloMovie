@@ -1,0 +1,38 @@
+﻿@model PagedList.IPagedList<Lab._06.MVC.BL.DTO.MovieDto>
+@using Lab._06.MVC.Web.Helper
+@using PagedList.Mvc;
+<link href="../../Content/css/PagedList.css" rel="stylesheet" type="text/css" />
+
+
+@foreach (var item in Model)
+{
+    <div class="container ">
+        <h1 align="center">
+            @item.MovieName
+        </h1>
+        <div class="row">
+            <div class="col-md-8">
+                @Html.Image(item.MoviePoster)
+            </div>
+            <div class="col-md-4">
+                <h4 align="center">Description:</h4>
+                <div align="justify">
+                    @{ var value = item.UserMovieNote.Length > 430 ? item.UserMovieNote.Substring(0, 420) + "..." : item.UserMovieNote;}
+                    <p>@Html.DisplayFor(modelItem => value)</p>
+                    <div align='center'>
+                        <button class="btn btn-primary" onclick="location.href='@Url.Action("GetCurrentMovie", "Movie", new { movieid = item.MovieId })';return false; ">View Movie</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr>
+    </div>
+}
+<div class="position-absolute bottom: 10px;">
+    <div align="center">
+        @if (Model.PageCount != 1)
+        {
+            @Html.PagedListPager(Model, page => Url.Action("GetAllMovies", "Movie", new { page }))
+        }
+    </div>
+</div>

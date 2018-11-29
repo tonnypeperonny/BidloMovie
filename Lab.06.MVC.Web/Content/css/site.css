@@ -1,0 +1,15 @@
+﻿body {
+    background-image: url('../background1.jpg');
+    background-repeat: no-repeat !important;
+    background-attachment: fixed !important;
+    background-position: center !important;
+}
+.bg-img .overlay { position: fixed; }
+
+h1 {
+    color: #c7c8d0 !important;
+}
+
+h4 {
+    color: #337ab7 !important;
+}
