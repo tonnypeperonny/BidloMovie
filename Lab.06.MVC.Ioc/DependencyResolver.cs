@@ -1,6 +1,7 @@
 ﻿using Autofac;
 using Lab._06.MVC.BL.CommentsService;
 using Lab._06.MVC.BL.DTO;
+using Lab._06.MVC.BL.DTO.Mapper;
 using Lab._06.MVC.BL.MovieService;
 using Lab._06.MVC.BL.UserService;
 using Lab._06.MVC.DL.Context;
@@ -8,10 +9,11 @@ using Lab._06.MVC.DL.Models;
 using Lab._06.MVC.DL.Repositories.CommentsRep;
 using Lab._06.MVC.DL.Repositories.MoviesRep;
 using Lab._06.MVC.DL.Uow;
+using Mapper;
 
 namespace Lab._06.MVC.Ioc
 {
-    public class Autofac
+    public class DependencyResolver
     {
         public ContainerBuilder ConfigureContainer()
         {
@@ -23,7 +25,8 @@ namespace Lab._06.MVC.Ioc
             builder.RegisterType<MovieLibraryContext>().AsSelf().InstancePerRequest();
             builder.RegisterType<CommentsRepository>().As<ICommentsRepository<UserComment>>().InstancePerRequest();
             builder.RegisterType<CommentsService>().As<ICommentsService>().InstancePerRequest();
-            builder.RegisterType<Mapper>().As<IMapper>().InstancePerRequest();
+            builder.RegisterType<MapperBL>().AsSelf().SingleInstance();
+
             return builder;
         }
     }

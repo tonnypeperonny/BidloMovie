@@ -11,10 +11,12 @@ namespace Lab._06.MVC.Web.Controllers
     public class MovieController : Controller
     {
         private readonly IMovieService<MovieDto> movieService;
+        private readonly MapperWeb mapper;
 
-        public MovieController(IMovieService<MovieDto> movieService)
+        public MovieController(IMovieService<MovieDto> movieService, MapperWeb mapper)
         {
             this.movieService = movieService;
+            this.mapper = mapper;
         }
 
         public ActionResult GetAllMovies(int? page)
@@ -29,7 +31,7 @@ namespace Lab._06.MVC.Web.Controllers
 
         [HttpPost]
         [Authorize]
-        public ActionResult CreateMovie(AddMovieModel model, HttpPostedFileBase upload)
+        public ActionResult CreateMovie(MovieViewModel model, HttpPostedFileBase upload)
         {
             if (ModelState.IsValid)
             {
@@ -51,7 +53,10 @@ namespace Lab._06.MVC.Web.Controllers
             return View(model);
         }
 
-        public ActionResult GetCurrentMovie(int movieid) => View(movieService.GetCurrentMovie(movieid));
+        public ActionResult GetCurrentMovie(int movieid)
+        {
+           return View(mapper.CreateMap(movieService.GetCurrentMovie(movieid)));
+        } 
 
         [Authorize]
         public ActionResult RemoveMovie(string movieName)
@@ -64,19 +69,19 @@ namespace Lab._06.MVC.Web.Controllers
         public ActionResult UpdateMovie(int movieid)
         {
             var movie = movieService.GetCurrentMovie(movieid);
-            var model = new AddMovieModel
+            var model = new MovieViewModel
             {
                 MoviePoster = movie.MoviePoster,
                 MovieName = movie.MovieName,
                 UserMovieNote = movie.UserMovieNote,
-                MovieId = movie.MovieId
+                MovieID = movie.MovieID
             };
             return View(model);
         }
 
         [HttpPost]
         [Authorize]
-        public ActionResult UpdateMovie(AddMovieModel model, HttpPostedFileBase upload)
+        public ActionResult UpdateMovie(MovieViewModel model, HttpPostedFileBase upload)
         {
             if (ModelState.IsValid)
             {
@@ -93,7 +98,7 @@ namespace Lab._06.MVC.Web.Controllers
                         MoviePoster = img.GetBytes(),
                         MovieName = model.MovieName,
                         UserMovieNote = model.UserMovieNote,
-                        MovieId = model.MovieId
+                        MovieID = model.MovieID
                     };
                     movieService.Update(movie);
                 }
@@ -103,7 +108,7 @@ namespace Lab._06.MVC.Web.Controllers
                     {
                         MovieName = model.MovieName,
                         UserMovieNote = model.UserMovieNote,
-                        MovieId = model.MovieId
+                        MovieID = model.MovieID
                     };
                     movieService.Update(movie);
                 }

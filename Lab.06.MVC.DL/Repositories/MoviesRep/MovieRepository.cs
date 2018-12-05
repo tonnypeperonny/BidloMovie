@@ -16,7 +16,7 @@ namespace Lab._06.MVC.DL.Repositories.MoviesRep
 
         public List<Movie> GetAll() => context.Movies.ToList();
 
-        public Movie GetById(int id) => context.Movies.SingleOrDefault(s => s.MovieId == id);
+        public Movie GetById(int id) => context.Movies.SingleOrDefault(s => s.MovieID == id);
 
         public Movie GetByName(string moviename) => context.Movies.SingleOrDefault(s => s.MovieName == moviename);
 
@@ -24,7 +24,7 @@ namespace Lab._06.MVC.DL.Repositories.MoviesRep
 
         public void Update(Movie entity)
         {
-            var oldEntity = context.Movies.Find(entity.MovieId);
+            var oldEntity = context.Movies.Find(entity.MovieID);
             if (entity.MoviePoster == null)
             {
                 entity.MoviePoster = oldEntity.MoviePoster;

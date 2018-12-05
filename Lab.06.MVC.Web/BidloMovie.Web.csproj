@@ -13,8 +13,8 @@
     <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Lab._06.MVC.Web</RootNamespace>
-    <AssemblyName>Lab.06.MVC.Web</AssemblyName>
+    <RootNamespace>BidloMovie.Web</RootNamespace>
+    <AssemblyName>BidloMovie.Web</AssemblyName>
     <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
     <UseIISExpress>true</UseIISExpress>
@@ -191,13 +191,16 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Helper\HtmlExtensions.cs" />
-    <Compile Include="Models\MapperWeb.cs" />
-    <Compile Include="Models\MovieViewModel.cs" />
-    <Compile Include="Models\AddCommentViewModel.cs" />
+    <Compile Include="Models\AddMovieModel.cs" />
+    <Compile Include="Models\CommentsModel.cs" />
     <Compile Include="Models\LoginModel.cs" />
     <Compile Include="Models\RegisterModel.cs" />
-    <Compile Include="Models\UserCommentViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\background1.jpg" />
@@ -247,7 +250,10 @@
     <None Include="packages.config" />
     <Content Include="Views\Movie\UpdateMovie.cshtml" />
     <Content Include="Scripts\jquery-3.3.1.min.map" />
-    <Content Include="Views\Comments\GetAllMovieComments.cshtml" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Lab.06.MVC.BL\Lab.06.MVC.BL.csproj">
@@ -261,10 +267,6 @@
     <ProjectReference Include="..\Lab.06.MVC.Ioc\Lab.06.MVC.Ioc.csproj">
       <Project>{02E16241-3328-4DF2-AB24-ADD3328BC537}</Project>
       <Name>Lab.06.MVC.Ioc</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Mapper\Mapper.csproj">
-      <Project>{3F233FF7-90C7-4FE1-A4DD-553A8D11C765}</Project>
-      <Name>Mapper</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

@@ -1,0 +1,26 @@
+﻿@model IEnumerable<Lab._06.MVC.Web.Models.UserCommentViewModel>
+    @foreach (var item in Model.ToList())
+    {
+        <hr>
+        <div id="nav" class="navbar nav-transparent row">
+            <div class="col-md-11">
+                <div class="col-md-1 .flex-column">
+                    <div type="upButton_@item.CommentID" class="glyphicon-plus " style="color:white"></div>
+                    <div class="p-2">@Html.DisplayFor(_ => item.CommentRating)</div>
+                    <div type="downButton_@item.CommentID" class="glyphicon-minus " style="color:white"></div>
+                </div>
+                <div class="col-md-offset-1">
+                    <strong class="text-info">@Html.DisplayFor(_ => item.UserName)<br></strong>
+                    @Html.DisplayFor(_ => item.UserComment)
+                </div>
+            </div>
+            <div class="col-lg-1">
+                @if (User.IsInRole("admin") || User.Identity.Name == item.UserName)
+                {
+                    <ul class="main-nav nav navbar-nav navbar-right">
+                        <li>@Html.ActionLink("Remove", "RemoveComment", "Comments", new { commentId = item.CommentID, movieid = item.MovieID }, null)</li>
+                    </ul>
+                }
+            </div>
+        </div>
+    }

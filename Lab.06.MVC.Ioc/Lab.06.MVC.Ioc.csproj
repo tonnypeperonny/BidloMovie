@@ -79,7 +79,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Autofac.cs" />
+    <Compile Include="DependencyResolver.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -90,6 +90,10 @@
     <ProjectReference Include="..\Lab.06.MVC.DL\Lab.06.MVC.DL.csproj">
       <Project>{2bca8afc-646a-491a-aaf8-97dbb0c8b415}</Project>
       <Name>Lab.06.MVC.DL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Mapper\Mapper.csproj">
+      <Project>{3F233FF7-90C7-4FE1-A4DD-553A8D11C765}</Project>
+      <Name>Mapper</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Lab._06.MVC.BL.DTO;
+using Lab._06.MVC.BL.DTO.Mapper;
 using Lab._06.MVC.DL.Models;
 using Lab._06.MVC.DL.Uow;
 
@@ -9,9 +10,9 @@ namespace Lab._06.MVC.BL.MovieService
     public class MovieService : IMovieService<MovieDto>
     {
         private readonly IUow uow;
-        private readonly IMapper mapper;
+        private readonly MapperBL mapper;
 
-        public MovieService(IUow uow, IMapper mapper)
+        public MovieService(IUow uow, MapperBL mapper)
         {
             this.uow = uow;
             this.mapper = mapper;
@@ -52,7 +53,7 @@ namespace Lab._06.MVC.BL.MovieService
                 var dtoList = new List<MovieDto>();
                 foreach (var movies in uow.MovieRepository.GetAll())
                 {
-                    dtoList.Add(mapper.MovieMapper(movies));
+                    dtoList.Add(mapper.CreateMap(movies));
                 }
 
                 return dtoList;
@@ -62,7 +63,7 @@ namespace Lab._06.MVC.BL.MovieService
         public MovieDto GetCurrentMovie(int movieid)
         {
             var movie = uow.MovieRepository.GetById(movieid);
-            return mapper.MovieMapper(movie);
+            return mapper.CreateMap(movie);
         }
 
         public void Update(MovieDto movieDto)
@@ -72,7 +73,7 @@ namespace Lab._06.MVC.BL.MovieService
                 MovieName = movieDto.MovieName,
                 UserMovieNote = movieDto.UserMovieNote,
                 MoviePoster = movieDto.MoviePoster,
-                MovieId = movieDto.MovieId
+                MovieID = movieDto.MovieID
             };
             uow.MovieRepository.Update(currentMovie);
             uow.Save();

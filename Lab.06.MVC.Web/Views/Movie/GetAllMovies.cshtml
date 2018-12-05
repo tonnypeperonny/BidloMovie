@@ -20,7 +20,7 @@
                     @{ var value = item.UserMovieNote.Length > 430 ? item.UserMovieNote.Substring(0, 420) + "..." : item.UserMovieNote;}
                     <p>@Html.DisplayFor(modelItem => value)</p>
                     <div align='center'>
-                        <button class="btn btn-primary" onclick="location.href='@Url.Action("GetCurrentMovie", "Movie", new { movieid = item.MovieId })';return false; ">View Movie</button>
+                        <button class="btn btn-primary" onclick="location.href='@Url.Action("GetCurrentMovie", "Movie", new { movieid = item.MovieID })';return false; ">View Movie</button>
                     </div>
                 </div>
             </div>

@@ -22,7 +22,7 @@ namespace Lab._06.MVC.DL.Context
         {
             modelBuilder.Entity<Movie>().HasMany(file => file.MovieComments).WithRequired(x => x.Movie).HasForeignKey(x => x.MovieId);
             modelBuilder.Entity<ApplicationUser>().HasMany(x => x.UserComments).WithRequired(x => x.User)
-                .HasForeignKey(x => x.Id);
+                .HasForeignKey(x => x.UserID);
             base.OnModelCreating(modelBuilder);
         }
     }
