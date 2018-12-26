@@ -16,7 +16,10 @@ namespace Lab._06.MVC.DL.Repositories.CommentsRep
 
         public UserComment GetById(int ID) => context.Comments.SingleOrDefault(s => s.CommentId == ID);
 
-        public IEnumerable<UserComment> GetAllMovieComments(int movieID) => context.Comments.Where(x => x.MovieId == movieID);
+        public IEnumerable<UserComment> GetAllMovieComments(int movieID)
+        {
+            return context.Comments.Where(x => x.MovieID == movieID);
+        }
 
         public List<UserComment> GetAllUserComments(int userID) => context.Comments.Where(x => x.UserID == userID.ToString()).ToList();
 

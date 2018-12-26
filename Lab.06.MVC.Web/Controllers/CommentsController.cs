@@ -1,11 +1,9 @@
-﻿using System.Web.Helpers;
+﻿using System.Linq;
 using System.Web.Mvc;
 using Lab._06.MVC.BL.CommentsService;
 using Lab._06.MVC.BL.DTO;
-using Lab._06.MVC.DL.Uow;
 using Lab._06.MVC.Web.Models;
 using Microsoft.AspNet.Identity;
-using WebGrease.Css.Extensions;
 
 namespace Lab._06.MVC.Web.Controllers
 {
@@ -14,9 +12,10 @@ namespace Lab._06.MVC.Web.Controllers
         private readonly ICommentsService commentsService;
         private readonly MapperWeb mapper;
 
-        public CommentsController(ICommentsService commentsService)
+        public CommentsController(ICommentsService commentsService, MapperWeb mapper)
         {
             this.commentsService = commentsService;
+            this.mapper = mapper;
         }
 
         [HttpGet]
@@ -38,16 +37,16 @@ namespace Lab._06.MVC.Web.Controllers
                     CommentRating = 0
                 };
                 commentsService.Create(commentDto);
-                return Json(new { success = true, responseText = "Comment was added." }, JsonRequestBehavior.AllowGet);
+                return Json(new { success = true, responseText = "Comment was added." });
             }
-            return Json(new { success = false, responseText = "Error during comment adding." }, JsonRequestBehavior.AllowGet);
+            return Json(new { success = false, responseText = "Error during comment adding." });
         }
 
-        [HttpGet]
+        [HttpPost]
         [Authorize]
         public ActionResult GetAllMovieComments(int movieID)
         {
-            return PartialView("GetAllMovieCommentsPartial", mapper.CreateMap(commentsService.GetAllMovieComments(movieID)));
+            return PartialView("GetAllMovieCommentsPartial", mapper.CreateMap(commentsService.GetAllMovieComments(movieID).Reverse()));
         }
 
         [Authorize]

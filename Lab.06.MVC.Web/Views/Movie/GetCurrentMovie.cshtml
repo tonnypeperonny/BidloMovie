@@ -1,8 +1,8 @@
 ﻿@using Lab._06.MVC.Web.Helper
-@using Lab._06.MVC.Web.Models
 @model Lab._06.MVC.Web.Models.MovieViewModel
 
 @Scripts.Render("~/bundles/comments")
+@Styles.Render("~/bundles/rainbowButton")
 
 <div class="container-fluid" align="center">
     <div class="container-fluid">
@@ -44,7 +44,11 @@
             @Html.Partial("~/Views/Comments/AddComment.cshtml")
         </p>
     }
-    @Html.Partial("~/Views/Comments/GetAllMovieCommentsPartial.cshtml", new { movieID = @Model.MovieID})
+    <a id="showNewCommentsBtn" class="rainbow-button" alt="Show new comments"></a>
+    <div id="commentsPartialView">
+
+    </div>
+    <hr>
 </div>
 
 <script type="text/javascript">

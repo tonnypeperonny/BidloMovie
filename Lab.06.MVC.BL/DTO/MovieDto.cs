@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace Lab._06.MVC.BL.DTO
+﻿namespace Lab._06.MVC.BL.DTO
 {
     public class MovieDto
     {

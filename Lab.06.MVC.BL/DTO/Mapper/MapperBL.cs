@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using Lab._06.MVC.DL.Models;
+﻿using Lab._06.MVC.DL.Models;
 using Mapper;
 
 namespace Lab._06.MVC.BL.DTO.Mapper
@@ -19,7 +18,7 @@ namespace Lab._06.MVC.BL.DTO.Mapper
             UserComment = userComment.Comment,
             CommentID = userComment.CommentId,
             UserID = userComment.UserID,
-            MovieID = userComment.MovieId,
+            MovieID = userComment.MovieID,
             UserName = userComment.UserName,
             CommentRating = userComment.CommentRating
         };

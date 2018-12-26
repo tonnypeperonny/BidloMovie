@@ -19,6 +19,10 @@ namespace Lab._06.MVC.Web
                 "~/Content/css/site.css"
                 ));
 
+            bundles.Add(new StyleBundle("~/bundles/rainbowButton").Include(
+                "~/Content/rainbowButton.css"
+            ));
+
             bundles.Add(new ScriptBundle("~/bundles/comments").Include(
                 "~/Scripts/Comment/comment.js"));
         }

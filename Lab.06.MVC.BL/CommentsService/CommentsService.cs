@@ -23,7 +23,7 @@ namespace Lab._06.MVC.BL.CommentsService
            var userComment = new UserComment
                 {
                    Comment = commentDto.UserComment,
-                   MovieId = commentDto.MovieID,
+                   MovieID = commentDto.MovieID,
                    UserID = commentDto.UserID,
                    UserName = commentDto.UserName
                 };

@@ -10,7 +10,7 @@ namespace Lab._06.MVC.DL.Models
         public int CommentId { get; set; }
         public string Comment { get; set; }
         public int CommentRating { get; set; }
-        public int MovieId { get; set; }
+        public int MovieID { get; set; }
         public virtual Movie Movie { get; set; }
         public string UserID { get; set; }
         public string UserName { get; set; }

@@ -1,6 +1,5 @@
 ﻿function CommentManager(options) {
 
-
     self.self.commentID = null;
     self.commentRating = null;
     self.MovieID = parseInt(options.MovieID);
@@ -10,48 +9,87 @@
     self.addCommentEvent = function () {
 
         $("form[id=addCommentForm]").on("submit",
-            function (event) {
+            function(event) {
                 event.preventDefault();
 
                 var commentModel = {
                     MovieID: self.MovieID,
-                    UserComment: $("input[id=commentInput]").val(),
+                    UserComment: $("input[id=commentInput]").val()
                 };
-
-                self.saveCommentToDB(commentModel);
-
+                
+                var saveResult = self.saveCommentToDB(commentModel);
                 $("#commentInput").val("");
+                
+                if (saveResult) {
+                    self.updateMovieComments();
+                }
             }
         );
     };
 
-    self.saveCommentToDB = function (commentModel) {
+    self.showNewCommentsEvent = function() {
+        $("a[id=showNewCommentsBtn]").on("click",
+            function() {
+                self.updateMovieComments();
+            });
+    };
 
-        var request = $.ajax({
+    self.updateCommentsPerTime = function () {
+        $(document).ready(function () {
+            setInterval(function () {
+                self.updateMovieComments();
+            }, 10000);
+        });
+    };
+
+    self.saveCommentToDB = function (commentModel) {
+        var succeed = false;
+
+        $.ajax({
             url: "../Comments/AddComment",
-        type: "POST",
+            type: "POST",
+            async: false,
             contentType: "application/json; charset=utf-8",
             data: JSON.stringify(commentModel),
-                    dataType: "json"
-    });
+            dataType: "json",
+            success: function() {
+                succeed = true;
+            }
+        });
 
-    request.done(function (data) {
-        alert(data.responseText);
-    });
+        return succeed;
+    };
 
-    request.fail(function (data) {
-        alert(data.responseText);
-    });
-};
+    self.renderCommentsPartialView = function () {
 
-self.eventsChekIn = function () {
-    self.addCommentEvent();
-};
+        $.ajax({
+            url: "../Comments/GetAllMovieComments",
+            type: "POST",
+            contentType: "application/json; charset=utf-8",
+            data: JSON.stringify({movieID: self.MovieID }),
+            dataType: "html"
+        }).done(function (data) {
+            $('#commentsPartialView').html(data);
+        });
+        
+    };
 
-self.init = function () {
-    self.eventsChekIn();
-};
+    self.updateMovieComments = function() {
+        $("div[class = movieComments]").remove();
+        self.renderCommentsPartialView();
+    };
 
-self.init();
+    self.eventsChekIn = function () {
+        self.addCommentEvent();
+        self.showNewCommentsEvent();
+        //self.updateCommentsPerTime();
+    };
+
+    self.init = function () {
+        self.eventsChekIn();
+        self.renderCommentsPartialView();
+    };
+
+    self.init();
 }
 

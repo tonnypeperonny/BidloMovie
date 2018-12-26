@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using Lab._06.MVC.BL.DTO;
-using Lab._06.MVC.DL.Models;
 using Mapper;
 
 namespace Lab._06.MVC.Web.Models
@@ -23,7 +20,9 @@ namespace Lab._06.MVC.Web.Models
             MovieID = entity.MovieID,
             UserComment = entity.UserComment,
             CommentID = entity.CommentID,
-            CommentRating = entity.CommentRating
+            CommentRating = entity.CommentRating,
+            UserID = entity.UserID,
+            UserName = entity.UserName
         };
 
         public IEnumerable<UserCommentViewModel> CreateMap(IEnumerable<UserCommentDto> entities)

@@ -20,7 +20,7 @@ namespace Lab._06.MVC.DL.Context
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Movie>().HasMany(file => file.MovieComments).WithRequired(x => x.Movie).HasForeignKey(x => x.MovieId);
+            modelBuilder.Entity<Movie>().HasMany(file => file.MovieComments).WithRequired(x => x.Movie).HasForeignKey(x => x.MovieID);
             modelBuilder.Entity<ApplicationUser>().HasMany(x => x.UserComments).WithRequired(x => x.User)
                 .HasForeignKey(x => x.UserID);
             base.OnModelCreating(modelBuilder);

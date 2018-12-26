@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-
-namespace Lab._06.MVC.Web.Models
+﻿namespace Lab._06.MVC.Web.Models
 {
     public class UserCommentViewModel
     {

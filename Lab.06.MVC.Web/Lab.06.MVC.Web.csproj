@@ -183,13 +183,15 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="App_Start\Startup.cs" />
+    <Compile Include="App_Start\OwinConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\CommentsController.cs" />
     <Compile Include="Controllers\MovieController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helper\AutofacModules\ControllerModule.cs" />
+    <Compile Include="Helper\AutofacModules\HelpersModule.cs" />
     <Compile Include="Helper\HtmlExtensions.cs" />
     <Compile Include="Models\MapperWeb.cs" />
     <Compile Include="Models\MovieViewModel.cs" />
@@ -203,6 +205,7 @@
     <Content Include="Content\background1.jpg" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\clean-blog.min.css" />
+    <Content Include="Content\rainbowButton.css" />
     <Content Include="Scripts\Comment\comment.js" />
     <Content Include="Content\css\bootstrap.min.css" />
     <Content Include="Content\css\style.css" />
@@ -247,9 +250,14 @@
     <None Include="packages.config" />
     <Content Include="Views\Movie\UpdateMovie.cshtml" />
     <Content Include="Scripts\jquery-3.3.1.min.map" />
-    <Content Include="Views\Comments\GetAllMovieComments.cshtml" />
+    <Content Include="Views\Comments\GetAllMovieCommentsPartial.cshtml" />
+    <Content Include="Views\Comments\MovieCommentPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Common\Common.csproj">
+      <Project>{CB488A2F-4766-4A61-AE64-C002C058A900}</Project>
+      <Name>Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Lab.06.MVC.BL\Lab.06.MVC.BL.csproj">
       <Project>{2707e210-0961-4547-9392-adfeedb9e494}</Project>
       <Name>Lab.06.MVC.BL</Name>
@@ -257,10 +265,6 @@
     <ProjectReference Include="..\Lab.06.MVC.DL\Lab.06.MVC.DL.csproj">
       <Project>{2bca8afc-646a-491a-aaf8-97dbb0c8b415}</Project>
       <Name>Lab.06.MVC.DL</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Lab.06.MVC.Ioc\Lab.06.MVC.Ioc.csproj">
-      <Project>{02E16241-3328-4DF2-AB24-ADD3328BC537}</Project>
-      <Name>Lab.06.MVC.Ioc</Name>
     </ProjectReference>
     <ProjectReference Include="..\Mapper\Mapper.csproj">
       <Project>{3F233FF7-90C7-4FE1-A4DD-553A8D11C765}</Project>

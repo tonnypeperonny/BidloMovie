@@ -1,0 +1,24 @@
+﻿@model Lab._06.MVC.Web.Models.UserCommentViewModel
+<hr>
+<div id="nav" class="navbar nav-transparent row">
+    <div class="col-md-11">
+        <div class="col-md-1 .flex-column">
+            <div type="upButton_@Model.CommentID" class="glyphicon-plus " style="color:white"></div>
+            <div class="p-2">@Html.DisplayFor(_ => Model.CommentRating)</div>
+            <div type="downButton_@Model.CommentID" class="glyphicon-minus " style="color:white"></div>
+        </div>
+        <div class="col-md-offset-1">
+            <strong class="text-info">@Html.DisplayFor(_ => Model.UserName)<br></strong>
+            @Html.DisplayFor(_ => Model.UserComment)
+        </div>
+    </div>
+    <div class="col-lg-1">
+        @if (User.IsInRole("admin") || User.Identity.Name == Model.UserName)
+        {
+            <ul class="main-nav nav navbar-nav navbar-right">
+                <li>@Html.ActionLink("Remove", "RemoveComment", "Comments", new { commentId = Model.CommentID, movieid = Model.MovieID }, null)</li>
+            </ul>
+        }
+    </div>
+</div>
+
